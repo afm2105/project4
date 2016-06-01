@@ -1,15 +1,22 @@
 <h1>Listing presidents</h1>
 
+<%= link_to 'New president', new_president_path %>
 <table>
   <tr>
     <th>Name</th>
     <th>Text</th>
+    <th colspan="3"></th>
   </tr>
 
-  <% @presidents.each do |prsident| %>
+  <% @presidents.each do |president| %>
     <tr>
       <td><%= president.name %></td>
       <td><%= president.text %></td>
+      <td><%= link_to 'Show', president_path(president) %></td>
+      <td><%= link_to 'Edit', edit_president_path(president) %></td>
+      <td><%= link_to 'Destroy', president_path(president),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

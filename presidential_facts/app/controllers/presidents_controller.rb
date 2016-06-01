@@ -8,13 +8,38 @@ class PresidentsController < ApplicationController
   end
 
   def new
+    @president = President.new
+  end
+
+  def edit
+    @president = President.find(params[:id])
   end
 
   def create
     @president = President.new(president_params)
-    @president.save
-    redirect_to @president
+    if @president.save
+      redirect_to @president
+    else
+      render 'new'
+    end
   end
+
+  def update
+    @president = President.find(params[:id])
+
+    if @president.update(president_params)
+      redirect_to @president
+    else
+      render 'edit'
+    end
+  end
+
+def destroy
+  @president = President.find(params[:id])
+  @president.destroy
+
+  redirect_to presidents_path
+end
 
   private
   def president_params
