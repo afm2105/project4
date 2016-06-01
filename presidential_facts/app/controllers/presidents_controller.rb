@@ -1,4 +1,8 @@
 class PresidentsController < ApplicationController
+  def index
+    @presidents = President.all
+  end
+
   def show
     @president = President.find(params[:id])
   end
@@ -7,15 +11,15 @@ class PresidentsController < ApplicationController
   end
 
   def create
-@president = President.new(president_params)
-@president.save
-redirect_to @president
-end
+    @president = President.new(president_params)
+    @president.save
+    redirect_to @president
+  end
 
-private
-def article_params
-  params.require(:article).permit(:name, :text)
-end
+  private
+  def president_params
+    params.require(:president).permit(:name, :text)
+  end
 
   #   @president = President.new(params.require(:president).permit(:name, :text)
   #   # render plain: params[:president].inspect
